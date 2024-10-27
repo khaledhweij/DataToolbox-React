@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.934fe58e.css",
+    "main.js": "/static/js/main.ae7f0aa1.js",
+    "static/media/edicom-logo.png": "/static/media/edicom-logo.d7fd66474765639b32b1.png",
+    "index.html": "/index.html",
+    "main.934fe58e.css.map": "/static/css/main.934fe58e.css.map",
+    "main.ae7f0aa1.js.map": "/static/js/main.ae7f0aa1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.934fe58e.css",
+    "static/js/main.ae7f0aa1.js"
+  ]
+}
