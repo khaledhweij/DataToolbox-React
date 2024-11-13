@@ -1,33 +1,59 @@
+import React from "react";
 import "./styles.css";
 
-function inputContent({firstContent, secondContent, firstFileInputRef, secondFileInputRef, setFirstContent, setSecondContent, setFirstFileName, setSecondFileName, setActiveInput}) {
-
-
-  // Function to auto-resize textarea
+function InputContent({
+  firstContent,
+  secondContent,
+  firstFileInputRef,
+  secondFileInputRef,
+  setFirstContent,
+  setSecondContent,
+  setFirstFileName,
+  setSecondFileName,
+  setActiveInput,
+}) {
   const handleResize = (e) => {
-    e.target.style.height = "auto"; // Reset height to auto to shrink if needed
-    e.target.style.height = '${e.target.scrollHeight}px'; // Set height to scrollHeight
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
   const handleFileUpload = (e, order) => {
     const file = e.target.files[0];
-    if (file ) {
+    if (file) {
       const reader = new FileReader();
-      
-      if(order ==="1"){
       reader.onload = (event) => {
-        setFirstFileName(file.name); // Set the file name in state
-        setFirstContent(event.target.result); 
+        if (order === "1") {
+          setFirstFileName(file.name);
+          setFirstContent(event.target.result);
+        } else {
+          setSecondFileName(file.name);
+          setSecondContent(event.target.result);
+        }
       };
-    } else {
-      reader.onload = (event) => {
-        setSecondFileName(file.name); // Set the file name in state
-        setSecondContent(event.target.result); 
-      };
-    }
       reader.readAsText(file);
     } else {
       alert("Please upload a valid file");
+    }
+  };
+
+  const handleFileDrop = (e, order) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (order === "1") {
+          setFirstFileName(file.name);
+          setFirstContent(event.target.result);
+        } else {
+          setSecondFileName(file.name);
+          setSecondContent(event.target.result);
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Please drop a text file (.txt)");
     }
   };
 
@@ -35,8 +61,13 @@ function inputContent({firstContent, secondContent, firstFileInputRef, secondFil
     <div className="container">
       <div className="input-group">
         <div className="input-container">
-          <label className="input-text">Enter First Content</label>
-          <input type="file" onChange={(e) => handleFileUpload(e, "1")} onFocus={() => setActiveInput("1")} className="input-text" ref={firstFileInputRef}></input>
+          <input
+            type="file"
+            onChange={(e) => handleFileUpload(e, "1")}
+            onFocus={() => setActiveInput("1")}
+            className="input-text"
+            ref={firstFileInputRef}
+          />
           <textarea
             id="first-content"
             value={firstContent}
@@ -46,12 +77,18 @@ function inputContent({firstContent, secondContent, firstFileInputRef, secondFil
             }}
             placeholder="Enter first content"
             onFocus={() => setActiveInput("1")}
+            onDrop={(e) => handleFileDrop(e, "1")}
+            onDragOver={(e) => e.preventDefault()}
           />
         </div>
         <div className="input-container">
-          <div></div>
-          <label className="input-text">Enter Second Content</label>
-          <input type="file" onChange={(e) => handleFileUpload(e, "2")} onFocus={() => setActiveInput("2")} className="input-text" ref={secondFileInputRef}></input>
+          <input
+            type="file"
+            onChange={(e) => handleFileUpload(e, "2")}
+            onFocus={() => setActiveInput("2")}
+            className="input-text"
+            ref={secondFileInputRef}
+          />
           <textarea
             id="second-content"
             value={secondContent}
@@ -61,6 +98,8 @@ function inputContent({firstContent, secondContent, firstFileInputRef, secondFil
             }}
             placeholder="Enter second content"
             onFocus={() => setActiveInput("2")}
+            onDrop={(e) => handleFileDrop(e, "2")}
+            onDragOver={(e) => e.preventDefault()}
           />
         </div>
       </div>
@@ -68,4 +107,4 @@ function inputContent({firstContent, secondContent, firstFileInputRef, secondFil
   );
 }
 
-export default inputContent;
+export default InputContent;
