@@ -55,7 +55,7 @@ const DocumentsPage = () => {
       formData.append("file", file);
     
       try {
-        const response = await fetch("http://localhost:8080/diffFormatter/convertFile", {
+        const response = await fetch("http://localhost:8080/DataToolbox/convertFile", {
           method: "POST",
           body: formData,
         });
@@ -103,7 +103,7 @@ const DocumentsPage = () => {
       files.forEach((file) => formData.append("files", file));
   
       try {
-        const response =  await fetch("http://localhost:8080/diffFormatter/mergeFiles", {
+        const response =  await fetch("http://localhost:8080/DataToolbox/mergeFiles", {
           method: "POST",
           body: formData,
         });
@@ -142,7 +142,7 @@ const DocumentsPage = () => {
       formData.append("lastPage", splitLastPage);  // Set last page
     
       try {
-        const response = await fetch("http://localhost:8080/diffFormatter/" + action, {
+        const response = await fetch("http://localhost:8080/DataToolbox/" + action, {
           method: "POST",
           body: formData,
         });
@@ -164,6 +164,7 @@ const DocumentsPage = () => {
 
     return (
     <div className="App">
+      <div className="main-content">
         <header className="header">
         <div className="logo-container">
             <img src={logo} alt="Logo" className="logo" />
@@ -191,6 +192,10 @@ const DocumentsPage = () => {
         setSplitLastPage={setSplitLastPage}
         />
         <OutputDocument downloadUrl={downloadUrl} output={output} downloadFilename={downloadFilename}/>
+        </div>
+        <div className="footer-text">
+          Internally Developed - For Internal Use - Version 1.0
+        </div>
     </div>
     );
     };

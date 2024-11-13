@@ -61,7 +61,7 @@ export default function MainPage() {
         setOutput("Contents cannot be empty.");
         return;
       }
-      const response = await fetch("http://localhost:8080/diffFormatter/compare", {
+      const response = await fetch("http://localhost:8080/DataToolbox/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstContent, secondContent }),
@@ -131,7 +131,7 @@ export default function MainPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:8080/diffFormatter/" + action, {
+      const response = await fetch("http://localhost:8080/DataToolbox/" + action, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: getContent()
@@ -159,6 +159,7 @@ export default function MainPage() {
 
   return (
     <div className="App">
+      <div className="main-content">
       <header className="header">
       {logo !=null && (
         <div className="logo-container">
@@ -196,6 +197,10 @@ export default function MainPage() {
           />
         </div>
       )}
+      </div>
+      <div className="footer-text">
+        Internally Developed - For Internal Use - Version 1.0
+      </div>
     </div>
   );
 }
