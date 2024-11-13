@@ -1,7 +1,7 @@
+import React from "react";
 import "./styles.css";
 
-const Buttons = ({handleCompare, handleClear, firstContent, handleGlobal}) => {
-
+const Buttons = ({ handleCompare, handleClear, handleGlobal }) => {
   return (
     <div className="button-group">
       <button className="compare-button" onClick={handleCompare}>
